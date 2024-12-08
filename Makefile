@@ -1,8 +1,7 @@
 GO_MODULE := github.com/allapptest/grpctest
 
-.PHONY: tidy
-tidy:
-	go mod tidy
+# Replace this with your own github.com/<username>/<repository>
+
 
 .PHONY: clean
 clean:
@@ -14,23 +13,17 @@ else
 	mkdir -p ./protogen/go
 endif
 
+
 .PHONY: protoc-go
 protoc-go:
 	protoc --go_opt=module=${GO_MODULE} --go_out=. \
 	--go-grpc_opt=module=${GO_MODULE} --go-grpc_out=. \
-	./proto/hello/*.proto ./proto/transaction/*.proto ./proto/payment/*.proto  \
+	./proto/hello/*.proto ./proto/payment/*.proto ./proto/transaction/*.proto \
+
 
 .PHONY: build
 build: clean protoc-go
 
-
-
-.PHONY: build
-build: clean protoc-go tidy
-
-.PHONY: run
-run: 
-	go run main.go
 
 .PHONY: pipeline-init
 pipeline-init:
