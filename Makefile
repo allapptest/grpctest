@@ -4,12 +4,14 @@ GO_MODULE := github.com/allapptest/grpctest
 tidy:
 	go mod tidy
 
-.PHONY: clean 
+.PHONY: clean
 clean:
 ifeq ($(OS), Windows_NT)
 	if exist "protogen" rd /s /q protogen
+	mkdir protogen\go
 else
-	rm -fR ./protogen
+	rm -fR ./protogen 
+	mkdir -p ./protogen/go
 endif
 
 .PHONY: protoc-go
